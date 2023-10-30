@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: compose/nginx
+    volumes:
+      - static:/app/static
+      - media:/app/media
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      dockerfile: compose/django/Dockerfile
+    command: /start
+    sysctls:
+      - net.ipv4.tcp_keepalive_time=120
+    volumes:
+      - static:/app/static
+      - media:/app/media
+      - /logs:/app/logs
+    env_file:
+      - .env
+
+  redis:
+    image: redis:6-alpine
+    restart: always
+    command: --port 6380
+    ports:
+      - "6370:6370"
+    expose:
+      - "6370"
+
+volumes:
+  #postgres_data:
+  static:
+  media:

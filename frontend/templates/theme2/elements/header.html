@@ -1,0 +1,105 @@
+{% load i18n %}
+{% load static custom_tags mptt_tags %}
+
+<header class="site-header header mo-left">
+    <!-- Main Header -->
+    <div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix ">
+            <div class="container clearfix">
+                <!-- Website Logo -->
+                <div class="logo-header logo-dark">
+                    <a href="{% url 'frontend:home' %}"><img src="{{site_config.Site.logo_dark.value}}" alt=""></a>
+                </div>
+                <!-- Nav Toggle Button -->
+                <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Extra Nav -->
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <a href="{% url 'frontend:contactus' %}" class="btn btn-primary rounded-xl gradient">Get A Quote</a>
+                    </div>
+                </div>
+                <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                    <div class="logo-header">
+                        <a href="{% url 'frontend:home' %}"><img src="{{site_config.Site.logo_dark.value}}" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar">
+                        
+                        
+                        {% with menu_items='header-menu'|getMenu %}
+                        {% recursetree menu_items %}
+
+                        <li>
+                        
+                            <a 
+                            {% if node.attributes.target == '1' %}
+                            target="_blank"
+                            {% endif %}
+                            class="{{ node.attributes.class }}"
+                            title="{{ node.attributes.title }}" 
+                            href="{% if node.link %}
+                                    {{ node.link }}
+                                    {% else %}
+                                    {{ node.type|getMenuItemUrl:node.item_id }}
+                                {% endif %}"
+                            
+
+                            >
+                            <span>
+                                {{node.title|truncatechars:20}}
+                            </span>
+                            {% if not node.is_leaf_node %}
+                            <i class="fa fa-chevron-down"></i>
+                            {% endif %}
+                           
+                            
+                          
+                         
+                           
+
+                            </a>
+                            {% if not node.is_leaf_node %}
+                            <ul class="sub-menu">
+                               
+                                {{children}}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {% endrecursetree %}
+                    {% endwith %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </ul>
+                    <div class="dlab-social-icon">
+                        <ul>
+                            <li><a class="fab fa-facebook-f" href="javascript:void(0);"></a></li>
+                            <li><a class="fab fa-twitter" href="javascript:void(0);"></a></li>
+                            <li><a class="fab fa-linkedin-in" href="javascript:void(0);"></a></li>
+                            <li><a class="fab fa-instagram" href="javascript:void(0);"></a></li>
+                        </ul>
+                    </div>		
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Header End -->
+</header>

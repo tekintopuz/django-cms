@@ -1,0 +1,79 @@
+.team-mamber-info{
+	display:flex;
+    align-items: center;
+	.dz-media{
+		width: 150px;
+		height: 150px;
+		overflow: hidden;
+		border-radius: 90px;
+		box-shadow: 0 0 0 10px rgba(255, 255, 255,1), 0 0 0 20px rgba(255, 255, 255, 0.2);
+		margin-left:10px;
+		img{
+			width:100%;
+		}
+	}
+	.dz-info{
+		padding-left:40px;
+		text-align: left;
+			
+		.title {
+			color:#fff;
+			margin-bottom:5px;
+		}
+		span{
+			color: rgba(255, 255, 255, 0.65);
+			display: block;
+			line-height: 1.3;
+			margin-bottom: 20px;
+		}
+	}
+	.dlab-social-icon li a {
+		height: 40px;
+		width: 40px;
+		line-height: 40px;
+		font-size: 18px;
+		border: 1px solid #eee;
+		&:hover{
+			border: none;		
+		}
+	}
+	@include respond('phone'){
+		.dz-media{
+			width: 80px;
+			height: 80px;
+			margin-left: 0px;
+			box-shadow: 0 0 0 5px white, 0 0 0 12px rgba(255, 255, 255, 0.2);
+		}
+		.dz-info{
+			padding-left: 25px;
+			span {
+				margin-bottom: 12px;
+			}
+		}
+		.dlab-social-icon li a {
+			height: 35px;
+			width: 35px;
+			line-height: 35px;
+			font-size: 16px;
+		}
+	}
+	&.style-2{
+		display: block;
+		.dz-media{
+			margin: 0 auto 40px;
+			border-radius: 0;
+			width: 120px;
+			height: 120px;
+		}
+		.dz-info{
+			padding-left: 0;
+			text-align: center;
+		}	
+		@include respond('phone'){
+			.dz-media{
+				width: 80px;
+				height: 80px;
+			}
+		}
+	}
+}

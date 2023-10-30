@@ -1,0 +1,48 @@
+// Slider Button
+[class*="slider-btn-"]{
+	.swiper-button{
+		.button-prev,
+		.button-next{
+			cursor: pointer;
+		
+			&:after{
+				content: none;
+			}
+		}
+	}
+}
+.slider-btn-1{
+	.swiper-button {
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		width: 180px;
+		margin: 30px auto 0;
+		
+		.button-prev,
+		.button-next {
+		    position: unset;
+			display: block;
+			text-align: center;
+			font-size: 25px;
+			line-height: 1;
+			color: #000;
+			margin: 0 20px;
+			-webkit-transition: all 0.2s;
+			-ms-transition: all 0.2s;
+			transition: all 0.2s;
+		}
+		.swiper-pagination {
+			position: unset;
+			font-size: 20px;
+			font-weight: 500;
+		}
+	}
+	.swiper-pagination { 
+		.swiper-pagination-current {
+			color: var(--primary);
+		}
+	}
+}

@@ -1,0 +1,80 @@
+/* Food  */
+
+
+h1, h2, h3, h4, h5, h6{
+	color:#11171A;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a{
+	color:#11171A;
+}
+body {
+	
+}
+
+
+.dlab-card.blog-lg h2.dlab-title{
+    font-size: 48px;
+    line-height: 1.1;
+}
+.dlab-card.blog-md:not(.half-post) .dlab-info .dlab-title:first-letter, .widget-post .dlab-info .dlab-title:first-letter, .dlab-card.blog-grid .dlab-info .dlab-title:first-letter, .dlab-card.blog-lg .dlab-info .dlab-title:first-letter {
+    background-color: rgba(0,0,0,0);
+    color: inherit;
+    padding: 0;
+}
+.dlab-card.blog-lg .dlab-info .dlab-title{
+	padding-right: 0;
+}
+.post-readmore{
+    position: relative;
+    top: auto;
+    bottom: auto;
+}
+.post-readmore:after,
+.post-readmore:before{
+	content:none;
+}
+.dlab-card .dlab-info p {
+    color: #263238;
+    font-family: 'PT Serif', serif;
+    font-size: 20px;
+    line-height: 1.7;
+}
+.post-boxed.blog-lg{
+	
+}
+.dlab-grid{
+	display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+        "featured-left featured-left ."
+        "featured-left featured-left ."
+        ". . ."
+        ". featured-right featured-right"
+        ". featured-right featured-right";
+}
+.dlab-grid .dlab-card{
+	border: 1px solid #E7EBED;
+    border-radius: 5px;
+    margin-bottom: 0;
+    padding: 40px;
+    transition: all 0.2s ease-in-out;
+    float: left;
+    margin: 0.5%;
+    width: 34.3%;
+}
+.dlab-grid .blog-lg {
+    margin: 1%;
+    width: 64.6%;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+{% load static mptt_tags custom_tags %}
+
+<header class="site-header mo-left header style-1">
+    <!-- main header -->
+    <div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix ">
+            <div class="container">
+                <div class="header-content-bx no-bdr">
+                    <!-- website logo -->
+                    <div class="logo-header">
+                        {% comment %} <a href="{% url 'frontend:home' %}" class="logo-dark"><img src="{% static 'theme4/images/logo.png' %}" alt=""></a>  {% endcomment %}
+                        <a href="{% url 'frontend:home' %}" class="logo-dark"><img src="{{site_config.Site.logo_dark.value}}" alt=""></a>
+                        <a href="{% url 'frontend:home' %}" class="logo-light"><img src="{{site_config.Site.other_logo.value}}" alt=""></a>
+                    </div>
+                    <!-- nav toggle button -->
+                    <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <!-- main nav -->
+                    <div class="header-nav navbar-collapse collapse justify-content-center" id="navbarNavDropdown">
+                        <div class="logo-header">
+                            <a href="{% url 'frontend:home' %}" class="logo-light"><img src="{{site_config.Site.logo_light.value}}" alt=""></a>
+                        </div>
+                        <!-- Navbar nav -->
+                        <ul class="nav navbar-nav navbar">
+                            {% with menu_items='header-menu'|getMenu %}
+                                {% recursetree menu_items %}
+                                 {% if not node.is_leaf_node %}
+                                    <li  class="sub-menu-down">
+                                    {% else %}
+                                    <li >
+                                    {% endif %}
+                                    <a
+                                    {% if node.attributes.target == '1' %}
+                                    target="_blank"
+                                    {% endif %}
+                                    class="{{ node.attributes.class }}"
+                                    title="{{ node.attributes.title }}" 
+                                    href="{% if node.link %}
+                                    {{ node.link }}
+                                    {% else %}
+                                    {{ node.type|getMenuItemUrl:node.item_id }} 
+                                    {% endif %}"
+                                    >
+                                        {{node.title|truncatechars:20}}
+                                    </a>
+                                  
+                                {% if not node.is_leaf_node %}
+                                 <ul class="sub-menu">
+                                {{children}}
+                                </ul>
+                                {% endif %}
+                    
+                            </li>
+                  
+                         {% endrecursetree %}
+                        {% endwith %}
+                            <li><a href="{% url 'frontend:contactus' %}">Contact</a></li> 
+                      </ul>
+                        <div class="social-menu">
+                            <ul>
+                                <li><a target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a target="_blank" href="https://www.google.co.in/"><i class="fab fa-google-plus-g"></i></a></li>
+                                <li><a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                                <li><a target="_blank" href="https://in.pinterest.com/"><i class="fab fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="extra-nav">
+                        <div class="extra-cell">
+                            <ul>
+                                <li><a target="_blank" href="https://www.facebook.com/" class="site-button-link"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a target="_blank" href="https://twitter.com/" class="site-button-link"><i class="fab fa-twitter"></i></a></li>
+                                <li><a target="_blank" href="https://in.pinterest.com/" class="site-button-link"><i class="fab fa-pinterest-p"></i></a></li>
+                                <li><a target="_blank" href="https://www.instagram.com/" class="site-button-link"><i class="fab fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main header END -->
+</header>
