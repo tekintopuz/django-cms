@@ -5,5 +5,6 @@ set -o pipefail
 set -o nounset
 
 python /app/manage.py migrate
+python /app/manage.py collectstatic
 
 /usr/local/bin/gunicorn --bind 0.0.0.0:8000 core.wsgi
