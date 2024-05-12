@@ -1,0 +1,327 @@
+/* Food  */
+@import url('https://fonts.googleapis.com/css?family=Amiri|Leckerli+One|Yanone+Kaffeesatz:200,300,400,500,600,700&display=swap');
+
+ /* 
+
+    font-family: 'Leckerli One', cursive;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Amiri', serif;
+
+ */
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Amiri', serif;
+}
+.author-bx .author-info .title.say-hi{
+    font-family: 'Leckerli One', cursive;
+    -webkit-text-stroke: 0px #b4b4b4;
+    font-weight: 400;
+    color: #ffaa00;
+    font-size: 90px;
+    line-height: 90px;
+}
+.author-bx .author-info p{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: #fff;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 1.2;
+}
+.author-social li a{
+	opacity:1;
+}
+.author-social li a span{
+	color:#fff;
+	font-weight: 400;
+	opacity:1;
+	
+}
+.author-social li a i{
+    border: 2px solid var(--text-color);
+    text-align: center;
+    line-height: 20px;
+    color: var(--text-color);
+}
+.dlab-card.blog-md:not(.half-post) .dlab-info .dlab-title:first-letter, 
+.widget-post .dlab-info .dlab-title:first-letter, 
+.dlab-card.blog-grid .dlab-info .dlab-title:first-letter, 
+.dlab-card.blog-lg .dlab-info .dlab-title:first-letter{
+	background-color:rgba(0,0,0,0);
+	color:inherit;
+	padding:0;
+}
+.current .trending-post .dlab-meta ul li{
+	color:#fff;
+}
+.trending-post.style1 .dlab-meta ul li a{
+	
+}
+.sub-title p{
+	font-size: 14px;
+    line-height: 18px;
+    color: rgba(255,255,255,0.8);
+}
+.subscribe-box{
+	background:var(--bg-color);
+	background: #fff;
+	box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);
+	position: relative;
+	z-index:1;
+}
+.subscribe-box:after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    left: 10px;
+    top: 10px;
+    border: 1px solid var(--bg-color);
+}
+.sub-title .title{
+	color:var(--bg-color);
+}
+.sub-title p{
+	color:#000;
+}
+.subscribe-box .form-control {
+    background: rgba(231,39,45,0.2);
+	color:#000;
+}
+.category-box .category-info a{
+	background: var(--bg-color);
+	color: #fff;
+}
+.subscribe-box .form-control:-moz-placeholder {
+    color: #000;
+	opacity:0.7;
+}
+.subscribe-box .form-control:-ms-input-placeholder {
+    color: #000;
+	opacity:0.7;
+}
+.subscribe-box .form-control::-webkit-input-placeholder {
+    color: #000;
+	opacity:0.7;
+}
+#sync1 .dlab-card{
+	margin-bottom:0;
+}
+#sync1 .dlab-info{
+	opacity:0;
+	transition:all 0.8s;
+	width: 70%;
+}
+#sync1 .center.owl-item .dlab-info{
+	opacity:1;
+}
+#sync1 .dlab-card.overlay-post .dlab-info .dlab-title{
+	font-size: 45px;
+    line-height: 1.2;
+}
+.widget-title{
+    background: transparent;
+    color: #000;
+    font-size: 28px;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    font-weight: 700;
+    line-height: 35px;
+    padding: 0 0 10px 0;
+	text-align: left;
+}
+.widget-title:after{
+	content:"";
+	left: 0;
+}
+.author-profile-info .author-profile-pic img {
+    width: 100%;
+}
+.author-profile-info .title {
+    font-size: 24px;
+    line-height: 30px;
+}
+.author-profile-info .author-profile-pic {
+    width: 250px;
+    min-width: 250px;
+    height: 250px;
+}
+.author-profile-content:after {
+    content: "Hi";
+    font-size: 70px;
+    height: 70px;
+    font-weight: 700;
+    color: #242627;
+    -webkit-text-stroke: 3px #fff;
+    position: absolute;
+    top: -95px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 3px 2px 5px #fff;
+}
+.dlab-card {
+    margin-bottom: 30px;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.1);
+}
+.post-column-bx .column-bx-sidebar {
+    padding:0;
+    border-right: 0;
+}
+.trending-post{
+	background: #f9f9f9;
+}
+.widget.widget-vlog .post-box a.video{
+	color: #fff;
+}
+.category-box .category-info {
+    bottom: auto;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+}
+.category-box .category-info a:before, .category-box .category-info a:after{
+	content:none;
+}
+.category-box .category-info a {
+    background: transparent;
+    color: #fff;
+    font-family: 'Amiri', serif;
+    font-size: 18px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+.category-box .category-info a:hover {
+    background: var(--bg-color);
+}
+.site-footer{
+	background-image: url(../images/banner/pic6.jpg);
+	position: relative;
+    z-index: 1;
+}
+.site-footer:after{
+    content: "";
+    position: absolute;
+    background: #000;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+    opacity: 0.90;
+}
+.category-head{
+	background:#fff;
+	box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);
+}
+.category-head:after,
+.next-prev-btn .prev, 
+.next-prev-btn .next,
+.category-head .dlab-title{
+	color: var(--bg-color);	
+	border-color:var(--bg-color);
+}
+.widget-post-bx .dlab-info{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+.column-bx-sidebar .trending-post {
+    padding: 0;
+    border: 0;
+    margin-bottom: 30px;
+    background: #fff;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.1);
+    border-radius: 0;
+}
+.trending-post .dlab-info .dlab-title{
+	margin-top: 5px;
+}
+.reload-btn:after, 
+.section-head:after,
+.section-head span{
+    background: var(--bg-color);	
+}
+.subscribe-box .btn:hover {
+    background-color: var(--bg-color-ho);
+}
+
+/* Rounded Layout */
+.rounded-layout .comments-area .comment-form p input[type="text"], 
+.rounded-layout .comments-area .comment-form p textarea,
+.rounded-layout .section-head span, 
+.rounded-layout .category-box .category-info a, 
+.rounded-layout .widget_categories ul li, 
+.rounded-layout .btn, 
+.rounded-layout .btn-secondry{
+	border-radius:4px;
+}
+.rounded-layout blockquote, 
+.rounded-layout .category-head:after, 
+.rounded-layout .category-head, 
+.rounded-layout .check-km, 
+.rounded-layout .category-box, 
+.rounded-layout .subscribe-box:after, 
+.rounded-layout .subscribe-box, 
+.rounded-layout .widget-post .dlab-media, 
+.rounded-layout .dlab-card, 
+.rounded-layout .widget-carousel .post-box, 
+.rounded-layout .dlab-card.overlay-post, 
+.rounded-layout .column-bx-sidebar .trending-post{
+	border-radius:8px;
+	overflow:hidden;
+}
+.rounded-layout .wp-block-gallery .blocks-gallery-image img, 
+.rounded-layout .wp-block-gallery .blocks-gallery-item img,
+.rounded-layout .comments-area .comment-form{
+	border-radius:8px;
+}
+
+.rounded-layout #sync1 .dlab-card{
+	border-radius:0;
+}
+.cate-images.widget_categories ul li{
+	position: relative;
+    z-index: 1;
+    padding: 25px 20px;
+    border: 0;
+    background-color: #000;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.cate-images.widget_categories ul li img{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+    z-index: -1;
+    object-position: center;
+    opacity: 0.5;
+}
+.cate-images.widget_categories ul li a{
+	color:#fff;
+	font-size: 18px;
+}
+.cate-images.widget_categories li .badge{
+	background-color:var(--bg-color);
+	color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

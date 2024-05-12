@@ -1,0 +1,98 @@
+{% load static mptt_tags custom_tags %}
+{% load i18n %}
+
+<!-- Header -->
+<header class="site-header mo-left header header-transparent style-1"> 
+
+    <!-- Main Header -->
+    <div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix">
+            <div class="container clearfix">
+
+                <!-- Website Logo -->
+                <div class="logo-header">
+                    <a href="{% url 'frontend:home' %}" class="logo-dark"><img src="{{site_config.Site.logo_dark.value}}" alt=""></a>
+                    <a href="{% url 'frontend:home' %}" class="logo-light"><img src="{{site_config.Site.other_logo.value}}" alt=""></a>
+                </div>
+                
+                <!-- Nav Toggle Button Strat -->
+                <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Nav Toggle Button End --> 
+                
+                <!-- Extra Nav Start -->
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <a class="btn btn-outline-primary text-white" target="_blank" href="{% url 'frontend:contactus' %}">{% translate "Contact Us" %}</a>
+                       
+                    </div>
+                </div>
+                <!-- Extra Nav End -->
+                    
+                <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                    
+                    <!-- Mobile Sidebar Logo -->
+                    <div class="logo-header mostion">
+                        <a href="{% url 'frontend:home' %}" class="logo-dark"><img src="{{site_config.Site.logo_dark.value}}" alt=""></a>
+                    </div>
+                  
+                    <!-- Navbar nav -->
+                        <ul class="nav navbar-nav navbar">
+                            {% with menu_items='header-menu'|getMenu %}
+                                {% recursetree menu_items %}
+                                 {% if not node.is_leaf_node %}
+                                    <li  class="sub-menu-down">
+                                    {% else %}
+                                    <li >
+                                    {% endif %}
+                                    <a
+                                    {% if node.attributes.target == '1' %}
+                                    target="_blank"
+                                    {% endif %}
+                                    class="{{ node.attributes.class }}"
+                                    title="{{ node.attributes.title }}" 
+                                    href="{% if node.link %}
+                                    {{ node.link }}
+                                    {% else %}
+                                    {{ node.type|getMenuItemUrl:node.item_id }}
+                                    {% endif %}"
+                                    >
+                                        {{node.title|truncatechars:20}}
+                                    </a>
+                                  
+                                {% if not node.is_leaf_node %}
+                                 <ul class="sub-menu">
+                                {{children}}
+                                </ul>
+                                {% endif %}
+                    
+                            </li>
+                  
+                         {% endrecursetree %}
+                        {% endwith %}
+                      </ul>
+                    <!-- Mobile Sidebar bottom -->
+                    <div class="header-bottom">
+                        <div class="dz-social-icon">
+                            <ul>
+                                <li><a target="_blank" class="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
+                                <li><a target="_blank" class="fab fa-twitter" href="https://twitter.com/"></a></li>
+                                <li><a target="_blank" class="fab fa-linkedin-in" href="https://www.linkedin.com/"></a></li>
+                                <li><a target="_blank" class="fab fa-instagram" href="https://www.instagram.com/"></a></li>
+                            </ul>
+                        </div>	
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    <!-- Main Header End -->
+
+</header>
+<!-- Header -->

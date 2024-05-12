@@ -1,0 +1,35 @@
+{% load static custom_tags %}
+
+<div class="banner-top-info">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-8">
+                <div class="location">
+                    <p><i class="fa fa-map-marker"></i>Miami, Florida, USA</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-4 align-self-center">
+                <ul class="social-link list-inline m-b0">
+                    <li><a href="javascript:void(0);" class="fa fa-instagram"></a></li>
+                    <li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Slider Banner -->
+<div class="banner-slide owl-carousel owl-dots">
+    {% for banner in site_config.Site.home_slider.value|split:"," %}
+    <div class="item">
+        <div class="slider-bx">
+            <div class="dlab-post-media overlay-black-light">
+                <img src="{{ banner }}" alt="">
+            </div>
+            <div class="slider-info text-white">
+                <h6>Welcome to</h6>
+                <h2>My Blog</h2>
+            </div>
+        </div>
+    </div>		
+    {% endfor %}
+</div>

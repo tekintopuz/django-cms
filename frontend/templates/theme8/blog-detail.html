@@ -1,0 +1,186 @@
+{% extends 'theme8/elements/layouts/layout1.html' %}
+
+{% load static custom_tags %}
+
+{% load static custom_tags widget_tweaks %}
+
+{% block additional_css %}
+{% endblock %}
+
+
+{% block message %}
+{% comment %} {% include 'dashboard/elements/alert.html' %} {% endcomment %}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+{% if instance %}
+    {% if not is_locked %}
+
+        <div class="blog-post blog-single sidebar">
+            <div class="dlab-info">
+                <div class="dlab-meta">
+                    <ul>
+                        <li class="post-author"><span>by</span> <a href="{% url 'frontend:author' username=instance.user.username %}">{{instance.user.first_name}} {{instance.user.last_name}}</a></li>
+                        <li class="post-category">in 
+                            {% for cate in instance.categories.all %}
+                                <a href="{% url 'frontend:blogcategory' slug=cate.slug %}">{{cate.title}},</a>
+                            {% endfor %}
+                        </li>
+                        <li class="post-date"> at <span>{{instance.publish_on}}</span></li>
+                    </ul>
+                </div>
+                <h2 class="dlab-title">{{ instance.title }}</h2>
+                <div class="dlab-media">
+                    <a href="javascript:;"><img src="/media/{{ instance.feature_image }}" alt=""></a>
+                </div>
+                <div class="dlab-post-text text">
+                    <p>{{ instance.excerpt }}</p>
+                    {{instance.content|safe}}
+                </div>
+                <div class="post-footer">
+                    <div class="dlab-meta">
+                        <ul class="tag-list">
+                            <li class="post-tag">
+                                {% for tag in instance.tags.all %}
+                                <a href="{% url 'frontend:blogtag' slug=tag.slug %}">{{tag.name}}</a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="share-post">
+                        <ul class="list-inline m-b0">
+                            <li><a href="javascript:void(0);" class="btn sharp radius-xl facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="javascript:void(0);" class="btn sharp radius-xl instagram"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="javascript:void(0);" class="btn sharp radius-xl twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="javascript:void(0);" class="btn sharp radius-xl linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear m-b30" id="comment-list">
+            <div class="comments-area" id="comments">
+                {% with allcomments.count as total_comments %}
+                <div class="section-head text-center">
+                    <span>Comment{{ total_comments|pluralize }} {{ total_comments }}</span>
+                </div>
+                {% endwith %}
+                <!-- comment list START -->
+
+                {% load mptt_tags %}
+
+                <ol class="comment-list">
+                    
+                    {% recursetree comments %}
+                    <li class="comment">
+                        <div class="comment-body">
+                            <div class="comment-author vcard"> 
+                                <img  class="avatar photo" src="/static/theme8/images/author-img/no-user.png" alt="">
+                                    {% if node.user %}
+                                        <cite class="fn">{{ node.user }}</cite> 
+                                    {% else %}
+                                        <cite class="fn">{{ node.name }}</cite> 
+                                    {% endif %} 
+                                <span class="says">says:</span> 
+                                <div class="comment-meta"> <a href="javascript:void(0);">{{ node.publish }}</a> </div>
+                                {% if node.level < 3 %}
+                                <div class="reply"> <a href="{{ node.id }}" data-commentid="{{ node.id }}" data-postid="{{ instance.id }}" data-replyto="Reply to {{ node.name }}" class="comment-reply-link w3-comment-reply">Reply</a> </div>
+                                {% endif %}
+                            </div>
+                            <div class="comment-content">
+                                <p>{{ node.content }}</p>
+                            </div>
+                        </div>
+                        {% if not node.is_leaf_node %}
+                        <ol class="children">
+                            {{ children }}
+                        </ol>
+                        {% endif %}
+                        <!-- list END -->
+                    </li>
+                    {% endrecursetree %}
+                </ol>
+                <!-- comment list END -->
+            </div>
+        </div>
+        <div class="comments-div">
+            <div class="comments-area" id="ReplyFormContainer">
+                
+                <div class="comment-respond" id="respond">
+                    <div class="section-head text-center">
+                        <span>LEAVE A REPLY</span>
+                    </div>
+                    <h3 class="comment-reply-title">
+                        <span id="reply-title"></span>
+                        <small> <a style="display:none;" href="javascript:void(0);" id="cancel-comment-reply" rel="nofollow">Cancel reply</a> </small>
+                    </h3>
+                    
+                    
+                    {% include 'theme8/elements/alert.html' %}
+                    {% if message %}
+                    <div class="text-success mb-3">{{ message }}</div>
+                    {% endif %}
+                    {% if errors %}
+                    <div class="text-danger mb-3">{{ errors }}</div>
+                    {% endif %}
+                    <form class="comment-form" id="commentform" method="post">
+                        {% csrf_token %}
+                        {{ comment_form.parent|attr:"type:hidden"|attr:"id:comment_parent_id"}}
+                        {{ comment_form.status|attr:"type:hidden"|attr:"id:id_status"}}
+                        {% comment %} {% if not request.user.is_authenticated %} {% endcomment %}
+                        <p class="comment-form-author">
+                            <label for="name">Name <span class="required">*</span></label>
+                            {{ comment_form.name|attr:"type:text"|attr:"id:id_name" |attr:"placeholder:Name" }}
+                        </p>
+                        <p class="comment-form-email">
+                            <label for="email">Email <span class="required">*</span></label>
+                            {{ comment_form.email|attr:"type:text"|attr:"id:id_email"|attr:"placeholder:Email" }}
+                        </p>
+                        {% comment %} {% endif %}  {% endcomment %}
+                        <p class="comment-form-comment">
+                            <label for="content">Comment</label>
+                            {{ comment_form.content|attr:"type:text"|attr:"id:id_content" |attr:"rows:5" |attr:"placeholder:Add a Comment" }}
+                        </p>
+                        <p class="form-submit" >
+                            <input type="submit" value="Post Comment" class="btn radius-no secondry" id="submit">
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form END -->
+            
+        {% else %}
+
+        <form  method="post"> {% csrf_token %}
+            <div class="form-group">
+                <label>Password <span class="text-danger">*</span></label>
+                <input type="password" name="password" class="form-control mb-3">
+                {% if message %}
+                <div class="text-danger mb-2">
+                    {{message}}
+                </div>
+                {% endif %}
+            </div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+
+    {% endif %}
+{% else %}
+<h3>Not Valid!!!</h3>
+<h4>{{message}}</h4>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+{% block additional_js %}
+
+{% endblock %}

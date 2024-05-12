@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- Meta -->
+	{% load static mptt_tags custom_tags %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+	<meta name="keywords" content=""/>
+	<meta name="author" content="DexignZone"/>
+	<meta name="robots" content=""/>
+	<meta name="description" content="{{ dz_array.pagelevel.frontend.public.description }}"/>
+	<meta property="og:title" content="{{ dz_array.pagelevel.frontend.public.og_title }}"/>
+	<meta property="og:description" content="{{ dz_array.pagelevel.frontend.public.og_description }}"/> 
+	<meta property="og:image" content="{{ dz_array.pagelevel.frontend.public.og_image }}"/>
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Title -->
+	<title>{{ site_config.Site.title.value }}</title>
+    
+	<!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{{ site_config.Site.favicon.value }}"> 
+    
+
+
+
+		{% for cssurl in dz_array.pagelevel.frontend.global.css.theme3 %}
+		<link  rel="stylesheet" href="{% static cssurl %}" >
+		{% endfor %}
+
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+</head>
+
+
+<body>
+<!--*******************
+        Preloader start
+    ********************-->
+    <div id="loader">
+	</div>
+    <!--*******************
+        Preloader end
+    ********************-->
+<div class="page-wraper">
+	<!-- Header -->
+	{% include site_config.Theme.value|add:'/elements/header.html' %}
+	<!-- Header End -->
+	
+	{% comment %} <div class="page-content "> {% endcomment %}
+
+<!-- Banner  -->
+<div class="dz-bnr-inr style-1 text-center">
+	<div class="container">
+		<div class="dz-bnr-inr-entry">
+			<h1>{{banner_title}}</h1>
+			{% comment %} <p class="text">Transfer USD, EUR, or Crypto and start trading today!</p> {% endcomment %}
+			<!-- Breadcrumb Row -->
+			<nav aria-label="breadcrumb" class="breadcrumb-row">
+				<ul class="breadcrumb">
+					
+					<li class="breadcrumb-item"><a href="/home">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Blog List</li> 
+				</ul>
+			</nav>
+			<!-- Breadcrumb Row End -->
+		</div>
+	</div>
+	<img class="bg-shape1" src="{% static 'theme3/images/home-banner/shape1.png' %}" alt="">
+	<img class="bg-shape2" src="{% static 'theme3/images/home-banner/shape1.png' %}" alt="">
+	<img class="bg-shape3" src="{% static 'theme3/images/home-banner/shape3.png' %}" alt="">
+	<img class="bg-shape4" src="{% static 'theme3/images/home-banner/shape3.png' %}" alt="">
+</div>
+<!-- Banner End -->
+
+
+
+	<!-- blog-list section start -->
+	<section class="content-inner bg-white">
+		<div class="container">
+			<div class="row ">
+				<div {% if site_config.Widget.show_sidebar.value == '1' %} 
+				class="col-xl-8 col-lg-8 m-b50"
+				{% else %}
+				class="col-xl-12 col-lg-12 m-b40"
+				{% endif %}>
+
+					<div class="row">
+
+						<!-- blog start --> 
+					{% block content %}
+					{% endblock %}
+					<!-- blog END -->
+						
+
+				
+					</div>
+				</div>
+				{% if site_config.Widget.show_sidebar.value == '1' %}
+				<div class="col-xl-4 col-lg-4">
+					<aside class="side-bar sticky-top right">
+						{% if site_config.Widget.show_search_widget.value == '1' %}
+						<div class="widget">
+							<div class="widget-title">
+								<h4 class="title">Search</h4>
+							</div>
+							<form role="search" action="{% url 'frontend:home'  %}" >
+								<div class="search-bx">
+									<form role="search" method="post">
+										<div class="input-group">
+											<div class="input-skew">
+												<input name="search" class="form-control" placeholder="Search.." type="text" {% if query %}value="{{query}}"{% endif %}>
+											</div>
+											<span class="input-group-btn">
+												<button type="submit" class="btn btn-primary sharp radius-no"><i class="fa-solid fa-magnifying-glass scale3"></i></button>
+											</span>
+										</div>
+									</form>
+								</div>
+							</form>
+						</div>
+						{% endif %}
+						
+						{% if site_config.Widget.show_category_widget.value == '1' %}
+						<div class="widget widget_categories">
+							<div class="widget-title">
+								<h4 class="title">Categories</h4>
+							</div>
+							<ul>
+								{% with categories=''|getWidgetCategories %}
+									{% recursetree categories %}
+										<li class="cat-item">
+											<a href="{% url 'frontend:blogcategory' slug=node.slug %}">{{node.title}}</a>
+										</li>
+										{% if not node.is_leaf_node %}
+										<ul>
+										{{children}}
+										</ul>
+										{% endif %}
+									{% endrecursetree %}                                     
+								{% endwith %}
+							</ul>
+						</div>
+						{% endif %}
+
+						{% if site_config.Widget.show_archive_widget.value == '1' %}
+						<div class="widget widget_categories">
+							<div class="widget-title">
+								<h4 class="title">Archives</h4>
+							</div>
+							<ul>
+								{% with archives=''|getWidgetArchives %}
+									{% for item in archives %}
+										<li class="cat-item">
+											<a href="{% url 'frontend:archive' year=item.year month=item.month %}">{{ item|date:"F Y" }}</a>
+										</li>
+										
+									{% endfor %}
+					 
+								{% endwith %}
+							</ul>
+						</div>
+						{% endif %}
+
+						{% if site_config.Widget.show_recent_post_widget.value == '1' %}
+
+						<div class="widget recent-posts-entry">
+							<div class="widget-title">
+								<h4 class="title">Recent Post</h4>
+							</div>
+							<div class="widget-post-bx">
+								{% with widget_blogs='3'|getRecentPOST  %}
+								{% for post in widget_blogs %}
+								<div class="widget-post clearfix">
+									<div class="dz-media">
+										<img src="/media/{{post.feature_image}}" alt="">
+									</div>
+									<div class="dz-info">
+										<h6 class="title"><a href="{% url 'frontend:blog-detail' slug=post.slug %}">{{post.title|truncatechars:35 }}</a></h6>
+										<div class="dz-meta">
+											<ul>
+												<li class="post-date"><a href="javascript:void(0);">{{post.publish_on}}</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								{% endwith %}
+							</div>
+						</div>
+						{% endif %}
+						
+						{% if site_config.Widget.show_tag_widget.value == '1' %}
+						<div class="widget widget_tag_cloud">
+							<div class="widget-title">
+								<h4 class="title">Popular Tags</h4>
+							</div>
+							<div class="tagcloud">
+								{% for tag in ''|getPopularTags %}
+								<a href="{% url 'frontend:blogtag' slug=tag.slug %}">{{tag.name}}</a> 
+								{% endfor %}
+							</div>
+						</div>
+						{% endif %}
+					</aside>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+	<!-- blog-list section start -->
+
+
+
+
+
+
+
+<!-- Bottom to top -->
+<button class="scroltop icon-up" type="button" style="display: inline-block;"><i class="fas fa-arrow-up"></i></button>
+
+
+
+	</div>
+		
+	<!-- Footer -->
+	{% include site_config.Theme.value|add:'/elements/footer.html' %} 
+    <!-- Footer End -->
+	<button class="scroltop icon-up" type="button"><i class="fa fa-arrow-up"></i></button>
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+
+
+
+
+		{% for jsurl in dz_array.pagelevel.frontend.global.js.theme3.top %}
+		<script src="{% static jsurl %}"></script>
+		{% endfor %}
+
+		
+		{% for jsurl in dz_array.pagelevel.frontend.global.js.theme3.bottom %}
+		<script src="{% static jsurl %}"></script>
+		{% endfor %}
+
+
+
+
+</body> 
+</html>

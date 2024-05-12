@@ -1,0 +1,151 @@
+{% extends 'theme2/elements/layouts/layout1.html' %}
+
+{% load static custom_tags %}
+
+{% load static custom_tags widget_tweaks %}
+
+{% block additional_css %}
+{% endblock %}
+
+
+
+
+{% block message %}
+
+{% endblock %}
+
+
+
+{% block content %}
+{% if instance %}
+    
+
+            <!-- blog start -->
+            <div class="dlab-blog blog-single style-1">
+                <div class="dlab-media rounded-md shadow">
+                    <img src="/media/{{ instance.feature_image }}" alt="">
+                </div>
+                <div class="dlab-info">
+                    <div class="dlab-meta  border-0 py-0 mb-2">
+                        <ul class="border-0 pt-0">
+                            <li class="post-date"><i class="flaticon-clock m-r10"></i>{{instance.publish_on}}</li>
+                            <li class="post-author"><i class="flaticon-user m-r10"></i>By <a href="{% url 'frontend:author' username=instance.user.username %}"> {{instance.user.first_name}}{{instance.user.last_name}}</a></li>
+                            <li><i class="post-category"></i>
+                                {% for cate in instance.categories.all %}
+                                <a href="{% url 'frontend:blogcategory' slug=cate.slug %}">{{cate.title}}</a>
+                                {% endfor %}
+                            </li>
+                            <li><i class="post-view"></i><a href="#">{{instance.views}}</a></li>
+                        
+                        </ul>
+                    </div>
+                    <h4 class="dlab-title">{{ instance.title }}</h4>
+                    <div class="dlab-post-text">
+                        <p>{{ instance.excerpt }}</p>
+
+                        {{instance.content|safe}}
+                    </div>
+                    <div class="dlab-meta meta-bottom border-top">
+                        <div class="post-tags">
+                                <strong>Tags:</strong>
+                                {% for tag in instance.tags.all %}
+                                <a href="{% url 'frontend:blogtag' slug=tag.slug %}">{{tag.name}}</a>,
+                            {% endfor %}
+                            </div>
+                        <div class="dlab-social-icon primary-light">
+                            <ul>
+                                <li><a class="fab fa-facebook-f" href="http://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}"></a></li>
+                                <li><a class="fab fa-linkedin" href="http://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}"></a></li>
+                                <li><a class="fab fa-twitter" href="https://twitter.com/share?url={{request.build_absolute_uri}}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear" id="comment-list">
+                <div class="comments-area style-1" id="comments">
+                    {% with allcomments.count as total_comments %}
+                    <h2 class="comments-title">{{ total_comments }} Comment{{ total_comments|pluralize }}</h2>
+                    {% endwith %}
+                    <div class="clearfix">
+                        <!-- comment list END -->
+                        {% load mptt_tags %}
+                        <ul class="comment-list">
+                            {% recursetree comments %}
+                            <li class="comment">
+                                <div class="comment-body">
+                                    <div class="comment-author vcard"> 
+                                        <img  class="avatar photo" src="/static/theme2/images/no-user.png" alt=""> 
+                                        <cite class="fn">{{ node.name }}</cite>
+                                    </div>
+                                    <p>{{ node.content }}</p>
+                                    <div class="reply"> 
+                                        <a href="{{ node.id }}" data-commentid="{{ node.id }}" data-postid="{{ instance.id }}" data-replyto="Reply to {{ node.name }}" class="comment-reply-link w3-comment-reply">Reply</a> 
+                                    </div>
+                                </div>
+                                {% if not node.is_leaf_node %}
+                                <ol class="children">
+                                    {{ children }}
+                                </ol>
+                                {% endif %}
+                                <!-- list END -->
+                            </li>
+                            {% endrecursetree %}
+                        </ul>
+                        <!-- comment list END -->
+                        <!-- Form -->
+                        <div class="comments-div">
+                            <div class="comment-respond style-1" id="ReplyFormContainer">
+                                <h2 class="comment-reply-title">LEAVE A REPLY 
+                                </h2>
+                                <h3 class="comment-reply-title">
+                                    <span id="reply-title"></span>
+                                    <small> <a style="display:none;" href="javascript:void(0);" id="cancel-comment-reply" rel="nofollow">Cancel reply</a></small> 
+                                </h3>
+                                {% include 'theme2/elements/alert.html' %}
+                                {% if message %}
+                                <div class="text-success mb-3">{{ message }}</div>
+                                {% endif %}
+                                {% if errors %}
+                                <div class="text-danger mb-3">{{ errors }}</div>
+                                {% endif %}
+                                <form class="comment-form" id="commentform" method="post">
+                                    {% csrf_token %}
+                                    {{ comment_form.parent|attr:"type:hidden"|attr:"id:comment_parent_id"}}
+                                    {{ comment_form.status|attr:"type:hidden"|attr:"id:id_status"}}
+                                    <p class="comment-form-author">
+                                        <label for="author">Name <span class="required">*</span></label>
+                                        {{ comment_form.name|attr:"type:text"|attr:"id:id_name" |attr:"placeholder:Name" }}
+                                    </p>
+                                    <p class="comment-form-email">
+                                        <label for="email">Email <span class="required">*</span></label>
+                                        {{ comment_form.email|attr:"type:text"|attr:"id:id_email"|attr:"placeholder:Email" }}
+                                    </p>
+                                    <p class="comment-form-comment">
+                                        <label for="comment">Comment</label>
+                                        {{ comment_form.content|attr:"type:text"|attr:"id:id_content" |attr:"rows:5" |attr:"placeholder:Add a Comment" }}
+                                    </p>
+                                    <p class="form-submit">
+                                        <button type="submit" class="btn btn-primary" id="submit">Submit Now<i class="fa fa-angle-right m-l10"></i></button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Form -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- blog END -->
+    
+
+{% else %}
+<h3>Not Found!!!</h3>
+
+
+{% endif %}
+{% endblock %}
+
+{% block additional_js %}
+
+{% endblock %}

@@ -1,0 +1,68 @@
+.site-footer{
+	&.style-5{
+		.footer-top{
+			background:var(--secondary);
+		}
+		.footer-bottom{
+			background:#0f1724;
+		}
+		.widget_services ul{
+			margin-top:-.5rem;
+		}
+		.footer-title{
+			position:relative;
+			padding-bottom:0;
+			margin-bottom: 30px;
+		}
+		.widget_services ul li a{
+			color:#aab4ba;
+			&:hover{
+				color:var(--primary);
+			}
+		}
+		.recent-posts-entry .widget-post-bx .widget-post .title a{
+			color:rgba(255,255,255,1);
+		}
+		.footer-link li{
+			color:rgba(255,255,255,.8);
+		}
+		.widget_about{
+			p{
+				color:rgb(170, 180, 186);
+			}
+		}
+		.footer-bottom{
+			color:rgba(255,255,255,.8);
+			text-align:center;
+			a{
+				color:var(--primary);
+			}
+		}
+		.ft-subscribe{
+			margin-bottom: 30px;
+			border:1px solid rgba(255, 255, 255, 0.1);
+			padding: 30px 40px;
+			.ft-row{
+				display: flex;
+				.form-control{
+					flex: 1;
+					margin-right: 15px;
+					border-radius: 0!important;
+				}
+			}
+			@include respond ('phone'){
+				padding: 30px 30px;
+				.ft-row{
+					display:block;
+					text-align: center;
+					.form-control{
+						margin-bottom:20px;
+					}
+				}
+				.footer-title{
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
+}
